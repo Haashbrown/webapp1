@@ -1,21 +1,33 @@
-//const mymodule = require('./mymodule');
-const { clickMe } = require('./mymodule');
-
-clickMe();
-//console.log(mymodule)
-//mymodule.clickMe()
-
-//const os = require('os');
+const http = require('http');
 const fs = require('fs');
 
-//fs.readFile()
-//fs.createReadStream();
+const server = http.createServer((req, res) => {
+    console.log(req.url);
 
-/*fs.readFile('./lorenz.txt', (err, data) => {
-    if (err) {
-        console.log(err);
+    res.setHeader('Content-Type', 'text/html');
+    let urll = './views/';
+
+    if (req.url == '/') {
+        urll += 'index.html';
+        res.statusCode == 200;
+    } else if (req.url == '/about') {
+        urll += 'about.html';
+        res.statusCode == 200;
     } else {
-        console.log(data.toString());
+        urll += '404.html';
+        res.statusCode == 404;
     }
+
+    fs.readFile(urll, (err, data) => {
+        if (err) {
+            console.log(err);
+            res.end();
+        } else {
+            res.end(data);
+        }
+    })
 });
-console.log('last line');*/
+
+server.listen(3000, 'localhost', () => {
+    console.log('listening');
+});
