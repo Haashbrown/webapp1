@@ -13,6 +13,9 @@ const server = http.createServer((req, res) => {
     } else if (req.url == '/about') {
         urll += 'about.html';
         res.statusCode == 200;
+    } else if (req.url == '/contact') {
+        urll += 'contact.html';
+        res.statusCode == 200;
     } else {
         urll += '404.html';
         res.statusCode == 404;
