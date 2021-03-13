@@ -1,6 +1,11 @@
 const http = require('http');
 const fs = require('fs');
-
+const weather = require('weather-js');
+weather.find({search: 'Gensan, PH', degreeType: 'C'}, function(err, result) {
+  if(err) console.log(err);
+ 
+  console.log(JSON.stringify(result, null, 2));
+});
 const server = http.createServer((req, res) => {
     console.log(req.url);
 

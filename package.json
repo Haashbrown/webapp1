@@ -1,0 +1,32 @@
+{
+  "name": "gitdemo1",
+  "version": "1.0.0",
+  "description": "This is my first node app created in vscode",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Haashbrown/webapp1.git"
+  },
+  "keywords": [
+    "node-app",
+    "firstnode",
+    "app",
+    "webapp",
+    "express"
+  ],
+  "author": "Gabriel Paderna",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "weather-js": "^2.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/Haashbrown/webapp1/issues"
+  },
+  "homepage": "https://github.com/Haashbrown/webapp1#readme"
+}
