@@ -1,6 +1,8 @@
 const express = require('express')
 const morgan = require('morgan')
+const request = require('request')
 const { students } = require('./students')
+const weather = require('weather-js');
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -11,15 +13,34 @@ app.use(morgan('dev'));
 
 app.get('/', function (req, res) {
   res.render('index', {title: 'Home', studentData: students });
-  //res.sendFile('./views/index.html', { root: __dirname });
 })
 app.get('/about', function (req, res) {
-  res.render('about', {title: 'About Us',  heading: 'New Heading' });
-  //res.sendFile('./views/about.html', { root: __dirname });
+  weather.find({search: 'Gensan, PH', degreeType: 'C'}, function(
+    err, 
+    result
+  ) {
+    if(err) {
+      console.log(err);
+
+      res.render('about', {title: 'About Us',  heading: 'New Heading', weather: 'Nothing' });
+    }
+    else{
+      console.log(JSON.stringify(result, null, 2));
+      res.render('about', {title: 'About Us',  heading: 'New Heading', weather: result });
+    }
+  });
+
 })
 app.get('/contact', function (req, res) {
-  res.render('contact', {title: 'Contacts' });
-  //res.sendFile('./views/contact.html', { root: __dirname });
+  request('https://www.thecocktaildb.com/api/json/v1/1/random.php', function (error, response, body) {
+    if(error) {
+      res.render('contact', {title: 'Contacts', drink: 'Nothing' });
+    } else {
+      const data = JSON.parse(body);
+      console.log('body:', data);
+      res.render('contact', {title: 'Contacts', drink: data });
+    }
+  });
 })
 app.get('/aboutus', function (req, res) {
   res.redirect('/about');
@@ -28,5 +49,4 @@ app.get('/aboutus', function (req, res) {
 
 app.use((req, res) => {
   res.render('404', {title: 'Error 404' });
-  //res.status(404).sendFile('./tobedeleted/404.html', { root: __dirname });
 });

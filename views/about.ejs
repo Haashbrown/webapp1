@@ -5,14 +5,56 @@
 <body>
     <%- include('./partials/navigation') %> 
     <div class="container">
-        <div class="row">
-            <h3 class="col s6 offset-s6">
-                <%= heading; %>
-            </h3>
-            <p class="col s6 offset-s6">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Laoreet sit amet cursus sit amet dictum sit. Nullam non nisi est sit amet facilisis magna etiam. Purus non enim praesent elementum facilisis leo vel fringilla est. Risus in hendrerit gravida rutrum quisque non tellus orci. Pellentesque habitant morbi tristique senectus et netus et malesuada fames. Feugiat scelerisque varius morbi enim nunc. Risus nec feugiat in fermentum posuere urna nec. Vivamus arcu felis bibendum ut tristique et egestas. Proin libero nunc consequat interdum varius sit amet mattis vulputate. Sed odio morbi quis commodo odio aenean sed adipiscing. Amet cursus sit amet dictum sit amet.</p>
+        <div class="row justify-content-md-center">
+            <% var location = weather[0]['location']['name'] %>
+            <% var start = location.search(',') %> 
+            <div class="col"></div>
+            <div class="col offset-s3">
+                <% var imageSource="https://www.countryflags.io/"+ location.slice(start+2,start+4) +"/flat/64.png" %>
+                <% console.log(imageSource) %> 
+                <img src=<%=imageSource %> height="128px" width="128px" style="padding-top: 25px"> 
+            </div>
+            <div class="col s6">
+                <h4>
+                    <%=location.slice(0,start) + location.slice(start,start+4) %>
+                </h4>
+                <h4><%= weather[0]['location']['lat'] %>° N, <%= weather[0]['location']['long'] %>° E </h4>
+            </div>
         </div>
     </div>
-
+    <div class="container" style="text-align: center;">
+        <div class="row">
+            <div class="col sm offset-s3"></div>
+            <% for(forcast of weather[0]['forecast']){ %>
+                    <!-- <%= //forcast['date'] %> : <%= //forcast['skytextday']  %>  -->
+                <div class="col sm">
+                    <% if(forcast['skytextday'].includes("Windy")) { %>
+                        <i class="bi-wind" style="font-size: 32px;"></i>
+                    <% } else if(forcast['skytextday'].includes("Snow")) { %>
+                        <i class="bi-cloud-snow" style="font-size: 32px;"></i>
+                    <% } else if(forcast['skytextday'].includes("Partly Cloudy")) { %>
+                        <i class="bi-cloud-sun" style="font-size: 32px;"></i>
+                    <% } else if(forcast['skytextday'].includes("Mostly Cloudy")) { %>
+                        <i class="bi-cloud" style="font-size: 32px;"></i>
+                    <% } else if(forcast['skytextday'].includes("Rain Showers")) { %>
+                        <i class="bi-cloud-rain-heavy" style="font-size: 32px;"></i>
+                    <% } else if(forcast['skytextday'].includes("Rain")) { %>
+                        <i class="bi-cloud-rain" style="font-size: 32px;"></i>
+                    <% } else if(forcast['skytextday'].includes("Sunny")||forcast['skytextday'].includes("Clear")) { %>
+                        <i class="bi-sun" style="font-size: 32px;"></i>
+                    <% }  %>
+                    <br>
+                    <b><%= forcast['day'] %></b>
+                    <br>
+                    <% months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] %>
+                    <%=months[parseInt(forcast['date'].slice(5,7))-1] + ' ' + forcast['date'].slice(8,10) + ', ' + forcast['date'].slice(0,4) %> 
+                    <br>
+                    <%= forcast['low'] %>°
+                </div>
+            <% } %>
+        </div>
+    </div>
+    <% //document.getElementById('imageBox').src = "https://www.countryflags.io/"+ location.slice(start+2,start+4) +"/flat/64.png"; %>
     <%- include('./partials/footer') %> 
 </body>
 
