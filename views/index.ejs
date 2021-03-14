@@ -8,8 +8,8 @@
         <div class="row justify-content-md-center">
             <% var location = weather[0]['location']['name'] %>
             <% var start = location.search(',') %> 
-            <div class="col"></div>
-            <div class="col offset-s3">
+            <div class="col s4"></div>
+            <div class="col s2">
                 <% var imageSource="https://www.countryflags.io/"+ location.slice(start+2,start+4) +"/flat/64.png" %>
                 <% console.log(imageSource) %> 
                 <img src=<%=imageSource %> height="128px" width="128px" style="padding-top: 25px"> 

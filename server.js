@@ -1,7 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
 const request = require('request')
-const { students } = require('./students')
 const weather = require('weather-js');
 const app = express();
 
@@ -12,9 +11,6 @@ app.listen(3000)
 app.use(morgan('dev'));
 
 app.get('/', function (req, res) {
-  res.render('index', {title: 'Home', studentData: students });
-})
-app.get('/about', function (req, res) {
   weather.find({search: 'Gensan, PH', degreeType: 'C'}, function(
     err, 
     result
@@ -22,28 +18,25 @@ app.get('/about', function (req, res) {
     if(err) {
       console.log(err);
 
-      res.render('about', {title: 'About Us',  heading: 'New Heading', weather: 'Nothing' });
+      res.render('index', {title: 'Home',  heading: 'New Heading', weather: 'Nothing' });
     }
     else{
       console.log(JSON.stringify(result, null, 2));
-      res.render('about', {title: 'About Us',  heading: 'New Heading', weather: result });
+      res.render('index', {title: 'Home',  heading: 'New Heading', weather: result });
     }
   });
 
 })
-app.get('/contact', function (req, res) {
+app.get('/other', function (req, res) {
   request('https://www.thecocktaildb.com/api/json/v1/1/random.php', function (error, response, body) {
     if(error) {
-      res.render('contact', {title: 'Contacts', drink: 'Nothing' });
+      res.render('other', {title: 'Other', drink: 'Nothing' });
     } else {
       const data = JSON.parse(body);
       console.log('body:', data);
-      res.render('contact', {title: 'Contacts', drink: data });
+      res.render('other', {title: 'Other', drink: data });
     }
   });
-})
-app.get('/aboutus', function (req, res) {
-  res.redirect('/about');
 })
 
 

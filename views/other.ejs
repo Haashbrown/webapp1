@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/header') %> 
+<body>
+    <%- include('./partials/navigation') %> 
+    <div class="row">
+      <div class="col s1"></div>
+      <div class="col s10" style="text-align: center;">
+        <h5><%= drink.drinks[0].strDrink %> </h5>
+        <img src=<%= drink.drinks[0].strDrinkThumb %> > 
+      </div>
+    </div>
+
+    <%- include('./partials/footer') %> 
+</body>
+
+</html>
