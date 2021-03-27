@@ -4,33 +4,67 @@
 <%- include('./partials/header') %> 
 <body>
     <%- include('./partials/navigation') %> 
-    <table class="striped">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Item Name</th>
-                <th>Item Price</th>
-            </tr>
-        </thead>
+    <br>
+    <br>
+    <br>
+    <!-- <button class="right-align">New</button> -->
+    <div class="container">
+        <img src="<%= countryImg %>">
+        <% //var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; %>
+        <%= //months[month] %> <%= //day %> <%= //fullYear %> 
+        <% //var newHour = 0 %> 
+        <% //if (hours > 12) { %>
+            <% //newHour = hours - 12 %> 
+            <%= //newHour %><%= //minutes %><%= //seconds %>
+        <% //} else { %> 
+            <%= //hours %><%= //minutes %><%= //seconds %>
+        <% //} %> 
+        <%= time['datetime'] %>
+        <div class="row">
+            <div class="col s12"></div>
+            <div class="col s12"></div>
+            <div class="col s12">
+                <table class="striped" style="font-family: 'Times New Roman', Times, serif;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th style="text-align:end; font-weight: normal;"><a class="waves-effect waves-light btn" style="background-color: #0001f3;" href="personnew">new</a></th>
+                        </tr>
+                        <tr class="000000 black" style="color: white;">
+                            <th style="text-align:center;">#</th>
+                            <th style="text-align:center;">Person Name</th>
+                            <th style="text-align:center;">Birthdate</th>
+                            <th style="text-align:center;">Nationality</th>
+                            <th style="text-align:center;">Actions</th>
+                        </tr>
+                    </thead>
 
-        <tbody>
-            <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-            </tr>
-            <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-            <td>$3.76</td>
-            </tr>
-            <tr>
-            <td>Jonathan</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
-            </tr>
-        </tbody>
-    </table>
+                    <tbody>
+
+                        <% counter = 1 %>
+                        <% if (persons.length > 0) { %> 
+                            <% persons.forEach(person => { %>
+                                <tr>
+                                    <td style="text-align:center;"><%= counter %></td>
+                                    <td style="text-align:center;"><%= person.fullname %></td>
+                                    <td style="text-align:center;"><%= person.birthdate %></td>
+                                    <td style="text-align:center;"><%= person.nationality %></td>
+                                    <% counter++ %>
+                                    <td style="text-align:center;"><a href="/personlist/<%= person._id %>">View</a></td>
+                                </tr>
+                            <% })  %> 
+                        <% } else { %>
+                            <tr>No Records</tr>
+                        <% } %> 
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
     <%- include('./partials/footer') %> 
 </body>
