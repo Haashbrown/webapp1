@@ -50,6 +50,7 @@ app.get('/other', function (req, res) {
 })
 
 
+
 app.use((req, res) => {
   res.render('404', {title: 'Error 404' });
 });
