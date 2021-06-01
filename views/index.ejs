@@ -3,12 +3,24 @@
 
 <%- include('./partials/header') %> 
 <body>
-    <%- include('./partials/navigation') %> 
-    ga-<i class="material-icons">science</i>ad.com
     <div class="container">
+        <h1 class="center-align">ga-Pad.com</h1>
         <div class="row">
-            <div class="col s3"></div>
-            <form class="col s5" action="/personlistjoin" method="POST">
+            <div class="col s5"></div>
+            <div class="col">
+                <a href="https://github.com/Haashbrown">
+                    <img src="https://image.flaticon.com/icons/png/512/25/25231.png" height="64px" width="64px">
+                </a>
+            </div>
+            <div class="col">
+                <a href="https://www.linkedin.com/in/gabriel-paderna-30a884213/">
+                    <img src="https://www.clipartmax.com/png/middle/36-367709_png-file-linkedin-logo-png-black.png" height="64px" width="64px">
+                </a>
+            </div>
+        </div>  
+        <div class="row">
+            <div class="col s4"></div>
+            <form class="col s5" action="/personlist" method="GET">
                 <div class="input-field col s6">
                     <select name="timezone" id="timezone">
                         <option value="" disabled selected>Time zone</option>
@@ -19,13 +31,45 @@
                     </select>
                 </div>
                 <div class="input-field col s6">
-                    <button class="btn" style="background-color: white; color: black">join</button>
+                    <button class="btn" style="background-color: white; color: black" onclick="storeCountry()">join</button>
                 </div>
             </form>
             <div class="col s3"></div>
         </div>
     </div>
     <%- include('./partials/footer') %> 
+    <script>
+        function storeCountry() {
+            var temp = document.getElementById("timezone");
+            var timezone = temp.options[temp.selectedIndex].text;
+            var urlTime = ""
+            var countryImg = ""
+            var nationality = ""
+            if (timezone == 'Singapore') {
+                urlTime = 'http://worldtimeapi.org/api/timezone/Asia/Singapore';
+                countryImg = 'https://www.countryflags.com/wp-content/uploads/singapore-flag-png-large.png'
+                nationality = 'Singaporean';
+            } else if (timezone == 'Canada') {
+                urlTime = 'http://worldtimeapi.org/api/timezone/Etc/GMT-4';
+                countryImg = 'https://www.countryflags.com/wp-content/uploads/canada-flag-png-large.png'
+                nationality = 'Canadian';
+            } else if (timezone == 'Sweden') {
+                urlTime = 'http://worldtimeapi.org/api/timezone/Europe/Stockholm';
+                countryImg = 'https://www.countryflags.com/wp-content/uploads/sweden-flag-png-xl.png'
+                nationality = 'Swedish';
+            } else if (timezone == 'France') {
+                urlTime = 'http://worldtimeapi.org/api/timezone/Europe/Paris';
+                countryImg = 'https://www.countryflags.com/wp-content/uploads/france-flag-png-large.png'
+                nationality = 'French';
+            }
+            console.log(urlTime, countryImg, nationality)
+            localStorage.setItem("urlTime", urlTime)
+            localStorage.setItem("countryImg", countryImg)
+            localStorage.setItem("nationality", nationality)
+            console.log("This is the console")
+        }
+    </script> 
+
 </body>
 
 </html>

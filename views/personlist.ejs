@@ -7,19 +7,41 @@
     <br>
     <br>
     <br>
-    <!-- <button class="right-align">New</button> -->
     <div class="container">
-        <img src="https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg" height="128px" width="128px" style="padding-top: 25px"<%= //countryImg %>>
-        <% //var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; %>
-        <%= //months[month] %> <%= //day %> <%= //fullYear %> 
-        <% //var newHour = 0 %> 
-        <% //if (hours > 12) { %>
-            <% //newHour = hours - 12 %> 
-            <%= //newHour %><%= //minutes %><%= //seconds %>
-        <% //} else { %> 
-            <%= //hours %><%= //minutes %><%= //seconds %>
-        <% //} %> 
-        <%= time['datetime'] %>
+        <div class="row">
+        <script>
+            var val = localStorage.getItem("countryImg") 
+            document.write(`<div class="col s3"></div><div class="col s3"><img src="${val}" height="128px" width="128px" style="padding-top: 25px" id="countryImg"></div>`)
+            var nat = localStorage.getItem("nationality")
+            var datetime = ""
+            if (nat == "Singaporean") {
+                datetime = '<%= dataList[0]["datetime"] %>'
+            } else if (nat == "Canadian") {
+                datetime = '<%= dataList[1]["datetime"] %>'
+            } else if (nat == "Swedish") {
+                datetime = '<%= dataList[2]["datetime"] %>'
+            } else if (nat == "French") {
+                datetime = '<%= dataList[3]["datetime"] %>'
+            }
+            var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"]
+            var month = months[datetime.slice(6,7)-1]
+            var day = datetime.slice(8,10)
+            var year = datetime.slice(0,4)
+            var hour = parseInt(datetime.slice(11,13))
+            var minuteSecond = datetime.slice(13,19)
+            var dayNight = "AM";
+            document.write(`<div class="col s4"><h3>${month} ${day}, ${year}</h3>`)
+            if (hour > 12 && hour < 24) {
+                dayNight = "PM"
+            }
+            if (hour > 12) {
+                hour = hour - 12
+            }
+            document.write(`<h4>${hour}`)
+            document.write(`${minuteSecond} ${dayNight}</h4></div>`)
+        </script>
+        </div>
+        <div id="result"></div>
         <div class="row">
             <div class="col s12"></div>
             <div class="col s12"></div>
@@ -67,6 +89,11 @@
     </div>
 
     <%- include('./partials/footer') %> 
+    <script>
+        // function renderTime() {
+        //     localStorage.setItem("countryImg", document.getElementById("countryImg").src)
+        // }
+    </script>
 </body>
 
 </html>

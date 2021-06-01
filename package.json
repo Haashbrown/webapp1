@@ -25,6 +25,7 @@
     "global-time": "^1.4.1",
     "mongoose": "^5.12.2",
     "morgan": "^1.10.0",
+    "node-fetch": "^2.6.1",
     "request": "^2.88.2",
     "weather-js": "^2.0.0"
   },

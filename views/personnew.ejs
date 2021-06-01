@@ -21,7 +21,7 @@
                                     <input placeholder="Full Name" id="fullname" name="fullname" type="text" class="validate" required>
                                 </div>
                                 <div class="input-field col s12">
-                                    <input readonly="true" value="Nationality" id="nationality" name="nationality" type="text" class="validate">
+                                    <input readonly="true" value="" id="nationality" name="nationality" type="text" class="validate">
                                 </div>
                                 <div class="input-field col s12">
                                     <input placeholder="Birthdate" id="birthdate" name="birthdate" type="text" class="validate" required>
@@ -31,6 +31,10 @@
                                 </div>
                             </form>
                         </div>
+                        <script>
+                            var nat = localStorage.getItem("nationality")
+                            document.getElementById("nationality").value = nat
+                        </script>
                     </div>
                 </div>
             </div>
